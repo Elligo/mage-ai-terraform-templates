@@ -21,19 +21,19 @@ variable "app_count" {
 variable "aws_region" {
   type        = string
   description = "AWS Region"
-  default     = "us-west-2"
+  default     = "us-east-1"
 }
 
 variable "aws_cloudwatch_retention_in_days" {
   type        = number
   description = "AWS CloudWatch Logs Retention in Days"
-  default     = 30
+  default     = 999999
 }
 
 variable "app_name" {
   type        = string
   description = "Application Name"
-  default     = "mage-data-prep"
+  default     = "elligods-mage-awe"
 }
 
 variable "app_environment" {
@@ -86,5 +86,5 @@ variable "private_subnets" {
 
 variable "availability_zones" {
   description = "List of availability zones"
-  default     = ["us-west-2a", "us-west-2b"]
+  default     = ["us-east-1a", "us-east-1b"]
 }
