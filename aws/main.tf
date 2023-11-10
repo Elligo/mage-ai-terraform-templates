@@ -46,7 +46,7 @@ data "template_file" "env_vars" {
     # lambda_func_arn = "${aws_lambda_function.terraform_lambda_func.arn}"
     # lambda_func_name = "${aws_lambda_function.terraform_lambda_func.function_name}"
     database_connection_url = "postgresql+psycopg2://${var.database_user}:${var.database_password}@${aws_db_instance.rds.address}:5432/mage"
-    ec2_subnet_id = aws_subnet.public[0].id
+    ec2_subnet_id = aws_subnet.private[0].id
   }
 }
 
@@ -140,7 +140,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   force_new_deployment = true
 
   network_configuration {
-    subnets          = aws_subnet.public.*.id
+    subnets          = aws_subnet.private.*.id
     assign_public_ip = true
     security_groups = [
       aws_security_group.service_security_group.id,
@@ -164,7 +164,7 @@ resource "aws_security_group" "service_security_group" {
     from_port       = 6789
     to_port         = 6789
     protocol        = "tcp"
-    cidr_blocks     = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks     = ["0.0.0.0/0"]
     security_groups = [aws_security_group.load_balancer_security_group.id]
   }
 

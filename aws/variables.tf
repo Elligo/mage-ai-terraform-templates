@@ -33,7 +33,7 @@ variable "aws_cloudwatch_retention_in_days" {
 variable "app_name" {
   type        = string
   description = "Application Name"
-  default     = "elligods-mage-awe"
+  default     = "elligods-mage"
 }
 
 variable "app_environment" {
